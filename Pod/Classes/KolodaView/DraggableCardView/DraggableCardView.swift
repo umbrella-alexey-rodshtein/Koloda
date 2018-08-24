@@ -246,7 +246,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             let rotationAngle = animationDirectionY * self.rotationAngle * rotationStrength
             let scaleStrength = 1 - ((1 - scaleMin) * fabs(rotationStrength))
             let scale = max(scaleStrength, scaleMin)
-    
+
             var transform = CATransform3DIdentity
             transform = CATransform3DScale(transform, scale, scale, 1)
             transform = CATransform3DRotate(transform, rotationAngle, 0, 0, 1)
@@ -297,7 +297,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
                 return (distance, direction)
             }
             return closest
-        }.direction
+            }.direction
     }
     
     private var dragPercentage: CGFloat {
@@ -319,9 +319,9 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             // check 4 borders for intersection with line between touchpoint and center of card
             // return smallest percentage of distance to edge point or 0
             return rect.perimeterLines
-                        .flatMap { CGPoint.intersectionBetweenLines(targetLine, line2: $0) }
-                        .map { centerDistance / $0.distanceTo(.zero) }
-                        .min() ?? 0
+                .flatMap { CGPoint.intersectionBetweenLines(targetLine, line2: $0) }
+                .map { centerDistance / $0.distanceTo(.zero) }
+                .min() ?? 0
         }
     }
     
@@ -336,7 +336,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         let shouldSwipe = { direction in
             return self.delegate?.card(self, shouldSwipeIn: direction) ?? true
         }
-        if let dragDirection = dragDirection , shouldSwipe(dragDirection) && dragPercentage >= swipePercentageMargin && directions.contains(dragDirection) {
+        if let dragDirection = dragDirection , shouldSwipe(dragDirection) && dragPercentage + 0.5 >= swipePercentageMargin && directions.contains(dragDirection) {
             swipeAction(dragDirection)
         } else {
             resetViewPositionAndTransformations()
