@@ -346,7 +346,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     // MARK: Private
     private func clear() {
         currentCardIndex = 0
-
+        countOfCards = 0
         for card in visibleCards {
             card.removeFromSuperview()
         }
